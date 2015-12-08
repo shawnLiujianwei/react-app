@@ -1,6 +1,5 @@
 logs
 *.log
-build
 .idea
 node_modules
 .vagrant
