@@ -25,7 +25,7 @@ describe('(View) Home', function () {
     _spies = {};
     _props = bindActionCreators({
       increment : (_spies.increment = sinon.spy())
-    }, _spies.dispatch = sinon.spy())
+    }, _spies.dispatch = sinon.spy());
 
 
     _component = shallowRenderWithProps(_props);

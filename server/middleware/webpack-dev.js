@@ -1,18 +1,18 @@
-import WebpackDevMiddleware from 'webpack-dev-middleware';
-import config               from '../../config';
-
-const paths = config.utils_paths;
-const debug = require('debug')('kit:server:webpack-dev');
-
-export default function ({ compiler, publicPath }) {
+//import WebpackDevMiddleware from 'webpack-dev-middleware';
+//import config               from '../../config';
+'use strict';
+//const paths = config.utils_paths;
+let debug = require('debug')('kit:server:webpack-dev');
+let WebpackDevMiddleware = require("webpack-dev-middleware");
+module.exports = function ( compiler, publicPath ) {
   debug('Enable Webpack dev middleware.');
 
   return WebpackDevMiddleware(compiler, {
-    publicPath,
-    contentBase : paths.base(config.dir_client),
+    publicPath:publicPath,
+    contentBase : require("path").join(__dirname,"../../src"),
     hot         : true,
-    quiet       : config.compiler_quiet,
-    noInfo      : config.compiler_quiet,
+    quiet       : false,
+    noInfo      : false,
     lazy        : false,
     stats       : {
       colors : true

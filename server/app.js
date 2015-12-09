@@ -1,7 +1,9 @@
-import express              from 'express';
-import historyApiFallback   from 'connect-history-api-fallback';
-import config               from '../config';
-
+//import express              from 'express';
+//import historyApiFallback   from 'connect-history-api-fallback';
+//import config               from '../config';
+'use strict';
+let express = require("express");
+let historyApiFallback = require("connect-history-api-fallback");
 const app   = express();
 const debug = require('debug')('kit:server');
 
@@ -11,16 +13,13 @@ app.use(historyApiFallback({
 
 // Enable webpack middleware if the application is being
 // run in development mode.
-if (config.env === 'development') {
+if (process.env.NODE_ENV === 'development') {
   const webpack       = require('webpack');
-  const webpackConfig = require('../build/webpack/development_hot');
+  const webpackConfig = require('../webpack.config');
   const compiler      = webpack(webpackConfig);
 
-  app.use(require('./middleware/webpack-dev')({
-    compiler,
-    publicPath : webpackConfig.output.publicPath
-  }));
-  app.use(require('./middleware/webpack-hmr')({ compiler }));
+  app.use(require('./middleware/webpack-dev')(compiler, webpackConfig.output.publicPath));
+  app.use(require('./middleware/webpack-hmr')(compiler));
 } else {
   debug(
     'Application is being run outside of development mode. This starter kit ' +
@@ -30,4 +29,4 @@ if (config.env === 'development') {
   );
 }
 
-export default app;
+module.exports = app;
