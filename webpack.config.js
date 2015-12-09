@@ -5,6 +5,7 @@
 //import cssnano           from 'cssnano';
 //import HtmlWebpackPlugin from 'html-webpack-plugin';
 //import config            from '../../config';
+const path = require("path");
 const webpack = require("webpack");
 const cssnano = require("cssnano");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -68,7 +69,7 @@ const webpackConfig = {
       'utils',
       'views'
     ].reduce((acc, dir) => {
-        acc[dir] = "./src/" + dir;
+        acc[dir] = path.join(__dirname, "./src/" + dir);
         return acc;
       }, {})
   },
