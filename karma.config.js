@@ -4,26 +4,21 @@
 //import { argv } from 'yargs';
 //import config   from '../config';
 
-const argv = {};
-const config = require("./config");
-const debug = require('debug')('kit:karma');
-debug('Create configuration.');
 
 const KARMA_ENTRY_FILE = 'karma.entry.js';
-const webpackConfig = require('./build/webpack/' + config.env);
-
+const webpackConfig = require('./webpack.config');
+var path = require("path");
 const karmaConfig = {
-  basePath: '../', // project root in relation to bin/karma.js
   files: [
-    './node_modules/phantomjs-polyfill/bind-polyfill.js',
-    `./${config.dir_test}/**/*.js`,
-    './' + KARMA_ENTRY_FILE
+    path.join(__dirname, './node_modules/phantomjs-polyfill/bind-polyfill.js'),
+    path.join(__dirname, `./tests/**/*.js`),
+    KARMA_ENTRY_FILE
   ],
-  singleRun: !argv.watch,
+  singleRun: !process.env.watch,
   frameworks: ['mocha', 'sinon-chai', 'chai-as-promised', 'chai'],
   preprocessors: {
     [KARMA_ENTRY_FILE]: ['webpack'],
-    [`${config.dir_test}/**/*.js`]: ['webpack']
+    [`tests/**/*.js`]: ['webpack']
   },
   reporters: ['spec'],
   browsers: ['PhantomJS'],
@@ -41,17 +36,21 @@ const karmaConfig = {
     noInfo: true
   },
   coverageReporter: {
-    reporters: config.coverage_reporters
+    reporters: [
+      {type: 'text-summary'},
+      {type: 'html', dir: 'coverage'}
+    ]
   }
 };
 
-if (config.coverage_enabled) {
-  karmaConfig.reporters.push('coverage');
-  karmaConfig.webpack.module.preLoaders = [{
-    test: /\.(js|jsx)$/,
-    include: new RegExp(config.get('dir_client')),
-    loader: 'isparta'
-  }];
-}
+karmaConfig.reporters.push('coverage');
+karmaConfig.webpack.module.preLoaders = [{
+  test: /\.(js|jsx)$/,
+  include: new RegExp("src"),
+  loader: 'isparta'
+}];
 
-export default (cfg) => cfg.set(karmaConfig);
+//export default (cfg) => cfg.set(karmaConfig);
+module.exports = function (cfg) {
+  cfg.set(karmaConfig);
+}
