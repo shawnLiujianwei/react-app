@@ -14,7 +14,6 @@ const karmaConfig = {
     path.join(__dirname, `./tests/**/*.js`),
     KARMA_ENTRY_FILE
   ],
-  singleRun: !process.env.watch,
   frameworks: ['mocha', 'sinon-chai', 'chai-as-promised', 'chai'],
   preprocessors: {
     [KARMA_ENTRY_FILE]: ['webpack'],

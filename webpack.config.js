@@ -40,8 +40,8 @@ const webpackConfig = {
       'NODE_ENV': process.env.NODE_ENV,
       '__DEV__': process.env.NODE_ENV === 'development',
       '__PROD__': process.env.NODE_ENV === 'production',
-      '__DEBUG__': process.env.NODE_ENV === 'development' && !process.no_debug,
-      '__DEBUG_NW__': !!process.nw
+      '__DEBUG__': process.env.NODE_ENV === 'development' && !process.env.no_debug,
+      '__DEBUG_NW__': process.env.nw
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),

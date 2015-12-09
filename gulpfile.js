@@ -34,6 +34,14 @@ gulp.task("test", function (done) {
   }, done).start();
 });
 
+gulp.task("test:dev", function (done) {
+  new Server({
+    configFile: __dirname + '/karma.config.js',
+    singleRun: true,
+    autoWatch:true
+  }, done).start();
+});
+
 gulp.task('lint', function () {
   return gulp.src(['./src/**/*.js', '!node_modules/**'])
     .pipe(eslint())
@@ -48,6 +56,18 @@ gulp.task('lint:tests', function () {
 });
 
 gulp.task("serve", function () {
+  const server = require('./server/app');
+  const debug = require('debug')('kit:bin:server');
+  var host = "127.0.0.1";
+  var port = 3000;
+
+  server.listen(port, host, function () {
+    debug('Server is now running at ' + host + ':' + port + '.');
+  });
+});
+
+gulp.task("serve:nw", function () {
+  process.env.nw = true;
   const server = require('./server/app');
   const debug = require('debug')('kit:bin:server');
   var host = "127.0.0.1";
