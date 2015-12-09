@@ -10,7 +10,7 @@ const debug = require('debug')('kit:karma');
 debug('Create configuration.');
 
 const KARMA_ENTRY_FILE = 'karma.entry.js';
-const webpackConfig = require('./webpack/' + config.env);
+const webpackConfig = require('./build/webpack/' + config.env);
 
 const karmaConfig = {
   basePath: '../', // project root in relation to bin/karma.js

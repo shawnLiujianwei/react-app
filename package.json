@@ -7,7 +7,7 @@
     "clean": "rm -rf dist",
     "lint": "eslint ./src/**/*.js",
     "lint:tests": "eslint ./tests/**/*.spec.js",
-    "compile": "node -r dotenv/config --harmony bin/compile",
+    "compile": "npm run clean && node -r dotenv/config --harmony bin/compile",
     "start": "npm run dev",
     "dev": "node -r dotenv/config --harmony bin/server",
     "dev:nw": "npm run dev -- --nw",

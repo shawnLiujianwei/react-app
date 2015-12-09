@@ -4,7 +4,7 @@
 var gulp = require('gulp'),
   clean = require('gulp-clean'),
   gutil = require("gulp-util");
-
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
 gulp.task('clean', function (callback) {
   return gulp.src('dist/*', {read: false})
     .pipe(clean());

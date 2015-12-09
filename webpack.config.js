@@ -10,7 +10,7 @@ const webpack = require("webpack");
 const cssnano = require("cssnano");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-process.env = process.env || "development";
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
 const debug = require('debug')('kit:webpack:_base');
 debug('Create configuration.');
 const webpackConfig = {
@@ -36,10 +36,10 @@ const webpackConfig = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'NODE_ENV': process.env,
-      '__DEV__': process.env === 'development',
-      '__PROD__': process.env === 'production',
-      '__DEBUG__': process.env === 'development' && !process.no_debug,
+      'NODE_ENV': process.env.NODE_ENV,
+      '__DEV__': process.env.NODE_ENV === 'development',
+      '__PROD__': process.env.NODE_ENV === 'production',
+      '__DEBUG__': process.env.NODE_ENV === 'development' && !process.no_debug,
       '__DEBUG_NW__': !!process.nw
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
@@ -156,7 +156,7 @@ commonChunkPlugin.__KARMA_IGNORE__ = true;
 webpackConfig.plugins.push(commonChunkPlugin);
 
 
-if (process.env === "production") {
+if (process.env.NODE_ENV === "production") {
   webpackConfig.module.loaders = webpackConfig.module.loaders.map(function (loader) {
     if (/css/.test(loader.test)) {
       //const [first, ...rest] = loader.loaders;

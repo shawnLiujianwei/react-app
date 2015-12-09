@@ -4,7 +4,6 @@ import { argv } from 'yargs';
 
 const debug = require('debug')('kit:config');
 debug('Create configuration.');
-
 const config = {
   env : process.env.NODE_ENV || "development",
 
