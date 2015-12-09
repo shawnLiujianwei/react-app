@@ -5,13 +5,12 @@
 //import cssnano           from 'cssnano';
 //import HtmlWebpackPlugin from 'html-webpack-plugin';
 //import config            from '../../config';
-const webpack = require("webpack").
-    cssnano = require("cssnano"),
-  HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
+const cssnano = require("cssnano");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 process.env = process.env || "development";
 const debug = require('debug')('kit:webpack:_base');
 debug('Create configuration.');
-console.log(new webpack);
 const webpackConfig = {
   name: 'client',
   target: 'web',
@@ -154,4 +153,4 @@ const commonChunkPlugin = new webpack.optimize.CommonsChunkPlugin(
 commonChunkPlugin.__KARMA_IGNORE__ = true;
 webpackConfig.plugins.push(commonChunkPlugin);
 
-modules.export = webpackConfig;
+module.exports = webpackConfig;
