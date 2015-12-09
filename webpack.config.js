@@ -9,6 +9,7 @@ const path = require("path");
 const webpack = require("webpack");
 const cssnano = require("cssnano");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 process.env = process.env || "development";
 const debug = require('debug')('kit:webpack:_base');
 debug('Create configuration.');
@@ -153,5 +154,33 @@ const commonChunkPlugin = new webpack.optimize.CommonsChunkPlugin(
 );
 commonChunkPlugin.__KARMA_IGNORE__ = true;
 webpackConfig.plugins.push(commonChunkPlugin);
+
+
+if (process.env === "production") {
+  webpackConfig.module.loaders = webpackConfig.module.loaders.map(function (loader) {
+    if (/css/.test(loader.test)) {
+      //const [first, ...rest] = loader.loaders;
+      const first = loader.loaders.shift();
+      const rest = loader.loaders;
+
+      loader.loader = ExtractTextPlugin.extract(first, rest.join('!'));
+      delete loader.loaders;
+    }
+
+    return loader;
+  });
+
+  webpackConfig.plugins.push(
+    new ExtractTextPlugin('[name].[hash].css'),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        'unused': true,
+        'dead_code': true
+      }
+    })
+  );
+} else {
+  webpackConfig.devtool = 'source-map';
+}
 
 module.exports = webpackConfig;
