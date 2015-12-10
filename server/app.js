@@ -22,8 +22,8 @@ var theHTTPLog = morgan('combined', {
     }
   }
 });
-
-app.use(theHTTPLog);
+app.use(morgan('dev'));
+//app.use(theHTTPLog);
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
