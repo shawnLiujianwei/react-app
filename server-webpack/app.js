@@ -4,19 +4,19 @@
 'use strict';
 let express = require("express");
 let historyApiFallback = require("connect-history-api-fallback");
-const app   = express();
+const app = express();
 const debug = require('debug')('kit:server');
-
+let config = require("config");
 app.use(historyApiFallback({
-  verbose : false
+  verbose: false
 }));
 
 // Enable webpack middleware if the application is being
 // run in development mode.
 if (process.env.NODE_ENV === 'development') {
-  const webpack       = require('webpack');
+  const webpack = require('webpack');
   const webpackConfig = require('../webpack.config');
-  const compiler      = webpack(webpackConfig);
+  const compiler = webpack(webpackConfig);
 
   app.use(require('./middleware/webpack-dev')(compiler, webpackConfig.output.publicPath));
   app.use(require('./middleware/webpack-hmr')(compiler));
@@ -29,4 +29,8 @@ if (process.env.NODE_ENV === 'development') {
   );
 }
 
+
+app.listen(config.server.dev.port, function () {
+  debug('Webpack dev server is now running at ' + config.server.dev.port + '.');
+});
 module.exports = app;

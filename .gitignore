@@ -4,4 +4,5 @@ logs
 node_modules
 .vagrant
 dist
+public/*.map
 coverage

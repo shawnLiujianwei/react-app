@@ -32,7 +32,7 @@ const webpackConfig = {
   },
   output: {
     filename: '[name].[hash].js',
-    path: path.join(__dirname, "./dist"),
+    path: path.join(__dirname, "./public"),
     publicPath: '/'
   },
   plugins: [
