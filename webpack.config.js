@@ -32,7 +32,7 @@ const webpackConfig = {
   },
   output: {
     filename: '[name].[hash].js',
-    path: path.join(__dirname,"./dist"),
+    path: path.join(__dirname, "./dist"),
     publicPath: '/'
   },
   plugins: [
@@ -176,7 +176,8 @@ if (process.env.NODE_ENV === "production") {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         'unused': true,
-        'dead_code': true
+        'dead_code': true,
+        'warnings': false
       }
     })
   );
