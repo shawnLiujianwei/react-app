@@ -56,7 +56,7 @@ gulp.task('lint:tests', function () {
 });
 
 gulp.task("serve", function () {
-  const server = require('./server/app');
+  const server = require('./server-webpack/app');
   const debug = require('debug')('kit:bin:server');
   var host = "127.0.0.1";
   var port = 3000;
@@ -68,7 +68,7 @@ gulp.task("serve", function () {
 
 gulp.task("serve:nw", function () {
   process.env.nw = true;
-  const server = require('./server/app');
+  const server = require('./server-webpack/app');
   const debug = require('debug')('kit:bin:server');
   var host = "127.0.0.1";
   var port = 3000;
