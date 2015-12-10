@@ -21,4 +21,5 @@ app.use(require('./middleware/webpack-hmr')(compiler));
 app.listen(config.server.dev.port, function () {
   console.log('Webpack dev server is now running at ' + config.server.dev.port + '.');
 });
+require("../server/app");
 module.exports = app;

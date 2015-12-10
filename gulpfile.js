@@ -62,25 +62,10 @@ gulp.task('lint:tests', function () {
     .pipe(eslint.failAfterError());
 });
 
-gulp.task("serve", function () {
-  const server = require('./server-webpack/app');
-  //const debug = require('debug')('kit:bin:server');
-  //var host = "127.0.0.1";
-  //var port = 3000;
-  //
-  //server.listen(port, host, function () {
-  //  debug('Server is now running at ' + host + ':' + port + '.');
-  //});
-});
+gulp.task("serve",["serve:nw"]);
 
 gulp.task("serve:nw", function () {
   process.env.nw = true;
-  const server = require('./server-webpack/app');
-  const debug = require('debug')('kit:bin:server');
-  var host = "127.0.0.1";
-  var port = 3000;
-
-  server.listen(port, host, function () {
-    debug('Server is now running at ' + host + ':' + port + '.');
-  });
-})
+  require('./server-webpack/app');
+});
+gulp.task("default",["serve"]);

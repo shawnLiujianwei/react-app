@@ -49,6 +49,7 @@ const webpackConfig = {
       template: './src/index.html',
       hash: false,
       filename: 'index.html',
+      favicon:"./favicon.ico",
       inject: 'body',
       minify: {
         collapseWhitespace: true
