@@ -19,7 +19,7 @@ const webpackConfig = {
   target: 'web',
   entry: {
     app: [
-      './src/app.js'
+      './src/index.js'
     ],
     vendor: [
       'history',

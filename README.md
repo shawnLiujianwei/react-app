@@ -123,7 +123,7 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 │   ├── store                # Redux store configuration
 │   ├── utils                # Generic utilities
 │   ├── views                # Components that live at a route
-│   └── app.js               # Application bootstrap and rendering
+│   └── index.js               # Application bootstrap and rendering
 └── tests                    # Unit tests
 ```
 
