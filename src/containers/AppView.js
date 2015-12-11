@@ -1,22 +1,22 @@
 import React from 'react';
 import 'styles/core.scss';
-import NavBar from "../components/NavBar.js"
-import Footer from "../components/footer.js"
+import Header from "./HeaderView.js"
+import Footer from "../components/Footer.js"
 export default class CoreLayout extends React.Component {
   static propTypes = {
-    children : React.PropTypes.element
+    children: React.PropTypes.element
   }
 
-  render () {
+  render() {
     return (
       <div className='container-fluid page-container'>
-        <div className="nav-container">
-          <NavBar />
+        <div className="nav-container row">
+          <Header />
         </div>
-        <div className='view-container'>
+        <div className='view-container row'>
           {this.props.children}
         </div>
-        <div className="footer-container">
+        <div className="footer-container row">
           <Footer />
         </div>
       </div>

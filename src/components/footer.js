@@ -8,7 +8,7 @@ let Footer = React.createClass({
     mixins: [ImmutableRenderMixin],
     render() {
         return (
-            <div className="col-md-2 col-md-offset-5 footer">
+            <div className="footer text-center">
                     <p>Copyright (c) 2008</p>
             </div>
         )
