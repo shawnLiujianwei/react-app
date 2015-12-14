@@ -2,6 +2,7 @@ import React from 'react';
 import 'styles/core.scss';
 import Header from "./HeaderView.js"
 import Footer from "../components/Footer.js"
+import "../styles/test.css"
 export default class CoreLayout extends React.Component {
   static propTypes = {
     children: React.PropTypes.element

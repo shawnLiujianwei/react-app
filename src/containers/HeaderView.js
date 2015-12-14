@@ -14,6 +14,8 @@ import SearchBar from "../components/SearchBar.js";
 export default React.createClass({
     "mixins": [ImmutableRenderMixin],
     render() {
+        let logo = require("../images/logo.png");
+        console.log(logo);
         return (
             <div className='header'>
                 <div className="row nav-bar">
@@ -22,7 +24,7 @@ export default React.createClass({
                     <div className="col-md-1 ">网站导航</div>
                 </div>
                 <div className="row search-bar">
-                    <div className="col-md-2"><img src="/public/images/logo.png"/></div>
+                    <div className="col-md-2"><img src="/images/logo.png"/></div>
                     <div className="col-md-4 col-md-offset-2">
                         <div className="input-group">
                             <input type="text" className="form-control" onKeyUp={this.props.filterItem}
