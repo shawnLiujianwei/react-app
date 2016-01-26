@@ -4,6 +4,7 @@
 'use strict';
 let express = require("express");
 let historyApiFallback = require("connect-history-api-fallback");
+let path = require("path");
 const app = express();
 let config = require("config");
 app.use(historyApiFallback({
@@ -14,7 +15,7 @@ app.use(historyApiFallback({
 const webpack = require('webpack');
 const webpackConfig = require('../webpack.config');
 const compiler = webpack(webpackConfig);
-
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(require('./middleware/webpack-dev')(compiler, webpackConfig.output.publicPath));
 app.use(require('./middleware/webpack-hmr')(compiler));
 
