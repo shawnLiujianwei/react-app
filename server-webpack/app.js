@@ -8,19 +8,18 @@ let path = require("path");
 const app = express();
 let config = require("config");
 app.use(historyApiFallback({
-  verbose: false
+    verbose: false
 }));
 // Enable webpack middleware if the application is being
 // run in development mode.
 const webpack = require('webpack');
 const webpackConfig = require('../webpack.config');
 const compiler = webpack(webpackConfig);
-app.use(express.static(path.join(__dirname, '../public')));
 app.use(require('./middleware/webpack-dev')(compiler, webpackConfig.output.publicPath));
 app.use(require('./middleware/webpack-hmr')(compiler));
 
 app.listen(config.server.dev.port, function () {
-  console.log('Webpack dev server is now running at ' + config.server.dev.port + '.');
+    console.log('Webpack dev server is now running at ' + config.server.dev.port + '.');
 });
-require("../server/app");
+//require("../server/app");
 module.exports = app;
