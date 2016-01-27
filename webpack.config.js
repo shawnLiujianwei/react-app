@@ -109,13 +109,17 @@ const webpackConfig = {
                     'sass-loader'
                 ]
             },
+            //{
+            //    test: /\.png$/,
+            //    loader: 'url?limit=100000&mimetype=image/png'
+            //},
+            //{
+            //    test: /\.jpg$/,
+            //    loader: 'file'
+            //},
             {
-                test: /\.png$/,
-                loader: 'url?limit=100000&mimetype=image/png'
-            },
-            {
-                test: /\.jpg$/,
-                loader: 'file'
+                test: /\.(png|jpg)$/,
+                loader: 'url?limit=25000'
             },
             {
                 test: /\.css$/,
