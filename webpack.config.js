@@ -14,6 +14,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 const debug = require('debug')('kit:webpack:_base');
 debug('Create configuration.');
+
+
 const webpackConfig = {
     name: 'client',
     target: 'web',
@@ -54,7 +56,8 @@ const webpackConfig = {
             minify: {
                 collapseWhitespace: true
             }
-        })
+        }),
+        new ExtractTextPlugin('[name].[hash].css')
     ],
     resolve: {
         extensions: ['', '.js', '.jsx'],
@@ -101,13 +104,14 @@ const webpackConfig = {
                 }
             },
             {
-                test: /\.scss$/,
-                loaders: [
-                    'style-loader',
-                    'css-loader?sourceMap',
-                    'postcss-loader',
-                    'sass-loader'
-                ]
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+            },
+            // Optionally extract less files
+            // or any other compile-to-css language
+            {
+                test: /\.scss/,
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
             },
             //{
             //    test: /\.png$/,
@@ -121,10 +125,10 @@ const webpackConfig = {
                 test: /\.(png|jpg)$/,
                 loader: 'url?limit=25000'
             },
-            {
-                test: /\.css$/,
-                loader: 'style-loader!css-loader'
-            },
+            //{
+            //    test: /\.css$/,
+            //    loader: 'style-loader!css-loader'
+            //},
             /* eslint-disable */
             {
                 test: /\.woff(\?.*)?$/,
@@ -175,21 +179,7 @@ webpackConfig.plugins.push(commonChunkPlugin);
 
 
 if (process.env.NODE_ENV === "production") {
-    webpackConfig.module.loaders = webpackConfig.module.loaders.map(function (loader) {
-        if (/css/.test(loader.test)) {
-            //const [first, ...rest] = loader.loaders;
-            const first = loader.loaders.shift();
-            const rest = loader.loaders;
-
-            loader.loader = ExtractTextPlugin.extract(first, rest.join('!'));
-            delete loader.loaders;
-        }
-
-        return loader;
-    });
-
     webpackConfig.plugins.push(
-        new ExtractTextPlugin('[name].[hash].css'),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 'unused': true,
@@ -199,7 +189,7 @@ if (process.env.NODE_ENV === "production") {
         })
     );
 } else {
-    webpackConfig.devtool = 'source-map';
+    //webpackConfig.devtool = 'source-map';
     // ------------------------------------
 // Define Overrides
 // ------------------------------------
