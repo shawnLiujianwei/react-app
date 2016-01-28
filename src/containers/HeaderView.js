@@ -4,7 +4,7 @@
 'use strict';
 import React                  from 'react';
 import { connect }            from 'react-redux';
-import counterActions         from 'actions/counter';
+import appActions         from 'actions';
 import { Link }               from 'react-router';
 import ImmutableRenderMixin from 'react-immutable-render-mixin';
 import "../styles/header.scss";

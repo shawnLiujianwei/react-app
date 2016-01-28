@@ -1,6 +1,6 @@
 import React                  from 'react';
 import { connect }            from 'react-redux';
-import counterActions         from 'actions/counter';
+import appActions         from 'actions';
 import { Link }               from 'react-router';
 import ImmutableRenderMixin from 'react-immutable-render-mixin';
 import LeftBar from "../components/LeftBar.js"
@@ -56,10 +56,7 @@ let HomeView = React.createClass({
     componentWillMount: function () {
     },
     componentDidMount: function () {
-        console.log("did-----------------------------")
-        var t = this.props;
-        console.log(JSON.stringify(this.props));
-        counterActions.increment();
+        this.props.increment();
     },
     render() {
 
@@ -88,7 +85,9 @@ let HomeView = React.createClass({
 //  </button>
 //  <hr />
 //  <Link to='/about'>Go To About View</Link>
-export default connect(mapStateToProps, function (dispatch) {
-    counterActions.dispatch = dispatch;
-    return counterActions;
-})(HomeView);
+//export default connect(mapStateToProps, function (dispatch) {
+//    appActions.dispatch = dispatch;
+//    return appActions;
+//})(HomeView);
+
+export default connect(mapStateToProps, appActions)(HomeView);
