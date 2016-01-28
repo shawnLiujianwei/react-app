@@ -1,10 +1,10 @@
 import { createReducer }     from '../utils';
-import { COUNTER_INCREMENT } from 'constants';
+let Constants = require("../constants");
 
 const initialState = 0;
 export default createReducer(initialState, {
     //[COUNTER_INCREMENT] : (state) => state + 1
-    [COUNTER_INCREMENT]: function (state) {
+    [Constants.Counter_Increment]: function (state) {
         console.log("Reducer ", new Date())
         return state + 1
     }
