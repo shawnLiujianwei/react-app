@@ -1,4 +1,4 @@
-import { createReducer }     from '../utils';
+import { createReducer }     from '../utils/index.js';
 let Constants = require("../constants");
 
 const initialState = 0;

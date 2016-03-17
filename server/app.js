@@ -32,6 +32,12 @@ app.use(function (req, res, next) {
 });
 if (process.env.NODE_ENV === 'production') {
     require('./authentication')(app);
+    app.use(function (req, res, next) {
+        if (req.url.match(/^\/(css|js|img|font)\/.+/)) {
+            res.setHeader('Cache-Control', 'public, max-age=3600');
+        }
+        next();
+    });
 }
 
 app.use(express.static(path.join(__dirname, '../public')));
